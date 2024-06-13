@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Exchangefy</string>
+    <string name="aud">Австралійський долар</string>
+    <string name="bgn">болгарський лев</string>
+    <string name="brl">Бразильський реал</string>
+    <string name="cad">Канадський долар</string>
+    <string name="chf">Швейцарський франк</string>
+    <string name="cny">Китайський ренмінбі Юань</string>
+    <string name="czk">Чеська крона</string>
+    <string name="dkk">Датська крона</string>
+    <string name="eur">Євро</string>
+    <string name="gbp">Британський фунт</string>
+    <string name="hkd">Гонконгський долар</string>
+    <string name="huf">Угорський форинт</string>
+    <string name="idr">Індонезійська рупія</string>
+    <string name="ils">Новий ізраїльський шекель</string>
+    <string name="inr">Індійська рупія</string>
+    <string name="isk">Ісландська крона</string>
+    <string name="jpy">Японська єна</string>
+    <string name="krw">Південнокорейська вона</string>
+    <string name="mxn">Мексиканське песо</string>
+    <string name="usd">Долар США</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

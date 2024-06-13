@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Currencify" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <!-- Light mode -->
+    <style name="SCREEN">
+        <item name="android:background">@drawable/bg_light</item>
+    </style>
+    <style name="TEXT">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="CARD">
+        <item name="android:background">@color/cardview_light_background</item>
+    </style>
+    <style name="DROPDOWN">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:drawableTint">@color/black</item>
+    </style>
+    <style name="SWITCH">
+        <item name="android:src">@drawable/light_to_dark_anim</item>
+    </style>
+
+    <style name="Theme.Currencify" parent="Base.Theme.Currencify" />
+</resources>

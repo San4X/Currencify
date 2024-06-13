@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:background">@drawable/dialog_window</item>
+    </style>
+    <style name="BottomNavigationTextActive" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/e_ukraine_regular</item>
+    </style>
+
+
+
+
+
+</resources>

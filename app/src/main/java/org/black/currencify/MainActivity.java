@@ -3,6 +3,7 @@ package org.black.currencify;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -44,6 +45,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import org.black.currencify.databinding.ActivityMainBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,7 +59,6 @@ import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 
-
     TextView topDropdown, botDropdown;
     EditText topEditText, botEditText;
     Dialog fromDialog;
@@ -68,9 +69,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean isTopHasFocus = false;
     LineChart lineChart;
     private static final String TAG = "MainActivity";
-
     ImageView imageView;
-
     AnimatedVectorDrawableCompat avdc;
     AnimatedVectorDrawable avd;
     int switchNumber = 0;
@@ -79,119 +78,10 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Navigation
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-                if (itemId == R.id.nav_cur_exchange) {
-                    // Вже на головній активності
-                    return true;
-                } else if (itemId == R.id.nav_map) {
-                    Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
-            }
-        });
-
-//        //Night & Dark modes
-//        imageView = findViewById(R.id.theme_switch);
-//
-//        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
-//        nightMode = sharedPreferences.getBoolean("nightMode", false);
-//
-//        if(nightMode){
-//            imageView.setImageDrawable(getDrawable(R.drawable.light_to_dark_anim));
-//
-//            //switchNumber++;
-//
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//        }
-//
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            /** @noinspection deprecation*/
-//            @SuppressLint("UseCompatLoadingForDrawables")
-//            @Override
-//            public void onClick(View v) {
-//
-//                if(nightMode){
-//
-//                    imageView.setImageDrawable(getDrawable(R.drawable.light_to_dark_anim));
-//                    Drawable drawable = imageView.getDrawable();
-//                    //Drawable drawable = getDrawable(R.drawable.light_to_dark_anim);
-//
-//                    if(drawable instanceof AnimatedVectorDrawableCompat){
-//                        avdc = (AnimatedVectorDrawableCompat) drawable;
-//                        avdc.start();
-//                    }else if(drawable instanceof AnimatedVectorDrawable){
-//                        avd = (AnimatedVectorDrawable) drawable;
-//                        avd.start();
-//                    }
-//
-//                    int animationDuration = 500; // Тривалість анімації в мілісекундах
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            //switchNumber++;
-//
-//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                            SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            editor.putBoolean("nightMode", false);
-//                            editor.apply();
-//
-//                            // Перезапуск активності для застосування нової теми
-//                            //recreate();
-//                        }
-//                    }, animationDuration);
-//
-//
-//                }else{
-//
-//
-//
-//                    imageView.setImageDrawable(getDrawable(R.drawable.dark_to_light_anim));
-//                    Drawable drawable = imageView.getDrawable();
-//                    //Drawable drawable = getDrawable(R.drawable.dark_to_light_anim);
-//
-//                    if(drawable instanceof AnimatedVectorDrawableCompat){
-//                        avdc = (AnimatedVectorDrawableCompat) drawable;
-//                        avdc.start();
-//                    }else if(drawable instanceof AnimatedVectorDrawable){
-//                        avd = (AnimatedVectorDrawable) drawable;
-//                        avd.start();
-//                    }
-//
-//                    int animationDuration = 500; // Тривалість анімації в мілісекундах
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            //switchNumber--;
-//
-//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                            SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            editor.putBoolean("nightMode", true);
-//                            editor.apply();
-//
-//                            // Перезапуск активності для застосування нової теми
-//                            //recreate();
-//                        }
-//                    }, animationDuration);
-//
-//                }
-//                //editor.apply();
-//            }
-//        });
-        ////////////////////
-
         //Night & Dark modes
         imageView = findViewById(R.id.theme_switch);
 
@@ -230,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean("nightMode", false);
                             editor.apply();
-                            recreate(); // Перезапуск активності для застосування нової теми
+                            //recreate(); // Перезапуск активності для застосування нової теми
                         }
                     }, animationDuration);
 
@@ -254,14 +144,13 @@ public class MainActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean("nightMode", true);
                             editor.apply();
-                            recreate(); // Перезапуск активності для застосування нової теми
+                            //recreate(); // Перезапуск активності для застосування нової теми
                         }
                     }, animationDuration);
                 }
             }
         });
-///////////////////////////////
-
+        ///////////////////////////////
         topDropdown = findViewById(R.id.convert_from_dropdown_menu);
         botDropdown = findViewById(R.id.convert_to_dropdown_menu);
         topEditText = findViewById(R.id.amountToConvertFirst);
@@ -277,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
             String name = getCurrencyNameByCode(code);
             currencies.add(new Currency(code, name));
         }
-
 
         topDropdown.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -318,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                         topCurrency = selectedCurrency.getCode();
 
                         if(!topEditText.getText().toString().isEmpty()){
-                            amountToConvert = Double.valueOf(MainActivity.this.topEditText.getText().toString());
+                            amountToConvert = Double.valueOf(topEditText.getText().toString()); //MainActivity.this.topEditText
                         } else {
                             amountToConvert = 0.0;
                         }
@@ -333,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         botDropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toDialog = new Dialog(MainActivity.this);
+                toDialog = new Dialog(MainActivity.this); //MainActivity.this as context
                 toDialog.setContentView(R.layout.to_spinner);
                 toDialog.getWindow().setLayout(800,1000);
                 toDialog.show();
@@ -369,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                         botCurrency = selectedCurrency.getCode();
 
                         if(!topEditText.getText().toString().isEmpty()){
-                            amountToConvert = Double.valueOf(MainActivity.this.topEditText.getText().toString());
+                            amountToConvert = Double.valueOf(topEditText.getText().toString()); //MainActivity.this.topEditText
                         } else {
                             amountToConvert = 0.0;
                         }
@@ -397,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(isTopHasFocus){
                     if(!topEditText.getText().toString().isEmpty()){
-                        amountToConvert = Double.valueOf(MainActivity.this.topEditText.getText().toString());
+                        amountToConvert = Double.valueOf(topEditText.getText().toString()); //same
                     } else {
                         amountToConvert = 0.0;
                     }
@@ -422,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(!isTopHasFocus){
                     if(!botEditText.getText().toString().isEmpty()){
-                        amountToConvert = Double.valueOf(MainActivity.this.botEditText.getText().toString());
+                        amountToConvert = Double.valueOf(botEditText.getText().toString()); //same
                     } else {
                         amountToConvert = 0.0;
                     }
@@ -435,10 +323,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     public String getConversionRate(String convertFrom, String convertTo, Double amountToConvert, EditText editText){
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         //String url = "https://11e78fe4-9699-4435-8860-83075aa5fd39-00-1psp2avkqc33q.kirk.replit.dev/api/black/"+convertFrom+"_"+convertTo;
         String url = "https://api.frankfurter.app/latest?from="+convertFrom+"&to="+convertTo;
 
@@ -484,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Double> getHistoricalChart(String from_cur, String to_cur) {
         List<Double> data = new ArrayList<>();
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
         // Отримуємо поточну дату
         Calendar calendar = Calendar.getInstance();
@@ -548,8 +437,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         LineDataSet lineDataSet = new LineDataSet(entries, "");
-        Drawable gradientDrawableGreen = ContextCompat.getDrawable(this, R.drawable.underline_chart_fade_green);
-        Drawable gradientDrawableRed = ContextCompat.getDrawable(this, R.drawable.underline_chart_fade_red);
+        Drawable gradientDrawableGreen = getDrawable(R.drawable.underline_chart_fade_green);
+        Drawable gradientDrawableRed = getDrawable(R.drawable.underline_chart_fade_red);
 
         if(data.get(0) < data.get(data.size() - 1)){
             lineDataSet.setColor(Color.GREEN);
@@ -583,4 +472,6 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "Chart built with " + data.size() + " entries.");
     }
+
+
 }
